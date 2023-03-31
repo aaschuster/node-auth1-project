@@ -14,7 +14,6 @@ module.exports = router;
 
 // Require the `restricted` middleware from `auth-middleware.js`. You will need it here!
 
-
 /**
   [GET] /api/users
 
