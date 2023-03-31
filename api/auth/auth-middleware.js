@@ -27,6 +27,7 @@ async function restricted(req, res, next) {
 function checkUsernameFree(req, res, next) {
   Users.findBy(["username", req.body.username])
     .then( user => {
+      console.log(user);
       if(user) next({
         status: 422,
         message: "Username taken"

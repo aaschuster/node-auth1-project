@@ -13,7 +13,7 @@ const express = require("express");
 
 const router = express.Router();
 
-router.post("/register", (req, res, next) => {
+router.post("/register", checkUsernameFree, (req, res, next) => {
   Users.add(req.body)
     .then( newUser => res.json(newUser))
     .catch(next);
