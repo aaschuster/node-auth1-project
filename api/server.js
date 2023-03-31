@@ -24,6 +24,9 @@ server.use(cors());
 const UserRouter = require("./users/users-router");
 server.use("/api/users", UserRouter);
 
+const AuthRouter = require("./auth/auth-router");
+server.use("/api/auth", AuthRouter);
+
 server.get("/", (req, res) => {
   res.json({ api: "up" });
 });
