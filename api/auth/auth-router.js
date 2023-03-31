@@ -17,7 +17,7 @@ const router = express.Router();
 router.post("/register", checkUsernameFree, checkPasswordLength, (req, res, next) => {
   const { username, password } = req.body;
   console.log("Hashing...");
-  const hash = bcrypt.hashSync(password, 14);
+  const hash = bcrypt.hashSync(password, 8);
   console.log("Hash complete");
 
   Users.add({ username, password: hash })
@@ -39,6 +39,17 @@ router.post("/login", checkUsernameExists, (req, res, next) => {
       } else next({ status: 401, message: "Invalid credentials"})
     })
     .catch(next);
+})
+
+router.get("/logout", (req, res, next) => {
+  if(req.session.user) {
+    req.session.destroy(err => {
+      if(err) res.json({ message: "Logout failed."});
+      else {
+        res.json({ message: "logged out"})
+      }
+    })
+  } else res.json({ message: "no session" });
 })
 
 module.exports = router;
