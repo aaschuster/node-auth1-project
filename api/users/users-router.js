@@ -4,7 +4,9 @@ const router = express.Router();
 
 const Users = require("./users-model");
 
-router.get("/", (req, res, next) => {
+const {restricted} = require("../auth/auth-middleware");
+
+router.get("/", restricted, (req, res, next) => {
   Users.find()
     .then( users => res.json(users))
     .catch(next);
